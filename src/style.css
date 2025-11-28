@@ -86,7 +86,9 @@ ul{
     align-items: center;
 }
 
-
+.nav{
+  font-weight: 500;
+}
 
 header{
     position: sticky;
@@ -175,6 +177,17 @@ input[type="search"]::-webkit-search-results-decoration {
   width: 2rem;
 }
 
+.search:hover{
+  border: 1px solid black;
+}
+
+.search-icon:hover{
+  transform: translateY(-2px);
+}
+
+.search-icon:active{
+  transform: translateY(2px);
+}
 
 /*Weather Display*/
 
@@ -183,6 +196,7 @@ input[type="search"]::-webkit-search-results-decoration {
   display: flex;
   width: 100%;
   border-radius: 24px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .weather-display-header{
