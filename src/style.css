@@ -81,7 +81,7 @@ ul{
     display: flex;
     justify-content: space-between;
     padding: 2rem 2rem;
-    background-color: #0C2B4E;
+    background-color: #1D546C;
     color: white;
     align-items: center;
 }
@@ -101,6 +101,8 @@ header{
 
 .main-content{
     min-height: 80vh;
+    padding-top: 1rem;
+    
 }
 
 .ul-nav-left{
@@ -125,3 +127,50 @@ header{
     background-size: 3rem;
 }
 
+
+/*Search Bar*/
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.main-content{
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  background-color: #F4F4F4;
+}
+
+#home-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search{
+  display: flex;
+  width: 45vw;
+  padding: 0.8rem 2rem;
+  gap: 1rem;
+  border: 1px solid gray;
+  border-radius: 50px;
+  justify-content: space-between;
+  background-color: white;
+}
+
+#search{
+  width: 80%;
+  border: none;
+  appearance: none;
+  outline: none;
+  background: none;
+  -webkit-appearance: none;
+}
+
+#search-logo{
+  width: 2rem;
+}
