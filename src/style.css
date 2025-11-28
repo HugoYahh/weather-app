@@ -99,8 +99,8 @@ header{
     height: 10vh;
 }
 
-.test{
-    height: 80vh;
+.main-content{
+    min-height: 80vh;
 }
 
 .ul-nav-left{
