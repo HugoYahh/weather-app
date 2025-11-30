@@ -1,14 +1,37 @@
 import './style.css'
-import {loadData, processData} from './fetch'
-import { loadView } from './dom';
-async function initApp() {
-    const rawData = await loadData(); // On attend que le fetch soit fini
-    if (rawData) {
-        processData(rawData); // On passe le résultat nettoyé
-    }
+import { loadData, processData } from './fetch'
+import { loadView, renderHome } from './dom';
+
+async function initApp(value) {
+    const rawData = await loadData(value);
+    if (!rawData) return null;
+    return processData(rawData);
 }
 
-//initApp();
+window.addEventListener("DOMContentLoaded", () => {
+
+    document.addEventListener('submit', async (e) => {
+        if (e.target && e.target.id === 'form') {
+            e.preventDefault();
+
+            const searchInput = e.target.querySelector('#search');
+            
+            if (searchInput) {
+                const value = searchInput.value.trim().toLowerCase();
+                console.log(value);
+
+                const city = value === "" ? "chatou" : value;
+                const data = await initApp(city);
+                
+                if(data) {
+                    renderHome(data);
+                }
+            }
+        }
+    });
+
+    initApp("chatou").then(renderHome);
+});
 
 document.querySelectorAll('.menu-item').forEach(item => {
   item.addEventListener('click', e => {
@@ -16,5 +39,3 @@ document.querySelectorAll('.menu-item').forEach(item => {
     loadView(view);
   });
 });
-
-//loadView('home');

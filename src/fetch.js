@@ -1,9 +1,9 @@
+import {fahrenheitToDegrees} from './helper'
 
 
-
-export async function loadData() {
+export async function loadData(value) {
   try {
-    const data = await fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Chatou?key=KKCWJMTE67NPVNGU6A5M2KYFK").then(r => r.json());
+    const data = await fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"+value+"?key=KKCWJMTE67NPVNGU6A5M2KYFK").then(r => r.json());
     console.log(data)
     return  data ;
   } catch (err) {
@@ -14,8 +14,13 @@ export async function loadData() {
 export async function processData(data){
     try{
         const dataNeeded = {
-            resume : data.currentConditions.conditions,
-            humidity : data.currentConditions.humidity,
+            currentIcon : data.currentConditions.icon,
+            currentHumidity : data.currentConditions.humidity,
+            currentTemperature : data.currentConditions.temp,
+            currentWindspeed : data.currentConditions.windspeed,
+            maxTemp : fahrenheitToDegrees(data.days[0].tempmax),
+            minTemp : fahrenheitToDegrees(data.days[0].tempmin),
+            address : data.address,
         }
         console.log(dataNeeded);
         return dataNeeded
