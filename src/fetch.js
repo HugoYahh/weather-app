@@ -18,9 +18,11 @@ export async function processData(data){
             currentHumidity : data.currentConditions.humidity,
             currentTemperature : data.currentConditions.temp,
             currentWindspeed : data.currentConditions.windspeed,
+            currentHour : data.currentConditions.datetime,
             maxTemp : fahrenheitToDegrees(data.days[0].tempmax),
             minTemp : fahrenheitToDegrees(data.days[0].tempmin),
             address : data.address,
+            hourly : data.days[0].hours,
         }
         console.log(dataNeeded);
         return dataNeeded

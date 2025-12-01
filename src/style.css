@@ -148,6 +148,14 @@ input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* Or your desired background color */
+  -webkit-text-fill-color: #000 !important; /* Adjust text color if needed */
+}
+
 .main-content{
   display: flex;
   justify-content: center;
@@ -255,8 +263,11 @@ input[type="search"]::-webkit-search-results-decoration {
   border-top: 2px solid lightgray;
   border-bottom: 2px solid lightgray;;
   padding: 1rem 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  
+  font-weight: 500;
+  align-items: center;
+  overflow-x: auto;
+  width: 50vw;
 
 }
 
@@ -265,11 +276,17 @@ input[type="search"]::-webkit-search-results-decoration {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+ 
 }
 
 .weather-display-main-hourly img{
-  width: 3rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.now{
+  font-weight: bold;
+  
 }
 
 /*Weather Display Footer*/

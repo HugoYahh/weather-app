@@ -13,6 +13,7 @@ import moonCloudyIcon from './assets/images/moon-cloudy.svg'
 import windIcon from './assets/images/wind.svg'
 import snowIcon from './assets/images/snow.svg'
 import errorIcon from './assets/images/error.svg'
+import { fahrenheitToDegrees } from './helper';
 
 export function loadView(viewName) {
   const main = document.querySelector(".main-content");
@@ -141,9 +142,110 @@ export function renderHome(data){
     
   //Handle the weather Display Main
 
+  const weatherDisplayMainDiv = document.createElement("div")
+  weatherDisplayMainDiv.classList.add("weather-display-main")
+  weatherDisplayDiv.appendChild(weatherDisplayMainDiv)
+
+  for(let i = 0 ; i < 24 ; i++){
+    const weatherDisplayMainHourlyDiv = document.createElement("div")
+    weatherDisplayMainHourlyDiv.classList.add("weather-display-main-hourly")
+    weatherDisplayMainDiv.appendChild(weatherDisplayMainHourlyDiv)
+
+    const weatherDisplayMainHourlyDivTemp = document.createElement("span")
+    weatherDisplayMainHourlyDivTemp.classList.add("weather-display-main-hourly-temp")
+    weatherDisplayMainHourlyDivTemp.textContent=fahrenheitToDegrees(data.hourly[i].temp)+"°"
+    weatherDisplayMainHourlyDiv.appendChild(weatherDisplayMainHourlyDivTemp)
+
+    const weatherDisplayMainHourlyDivImg = document.createElement("img")
+    weatherDisplayMainHourlyDivImg.classList.add("weather-display-main-hourly-logo")
+
+    if(data.hourly[i].icon==="partly-cloudy-day"){
+      weatherDisplayMainHourlyDivImg.src=overcastIcon;
+    } else if (data.hourly[i].icon==="clear-day"){
+      weatherDisplayMainHourlyDivImg.src=sunIcon;
+    } else if(data.hourly[i].icon==="clear-night"){
+      weatherDisplayMainHourlyDivImg.src=moonIcon;
+    } else if(data.hourly[i].icon==="partly-cloudy-night"){
+      weatherDisplayMainHourlyDivImg.src=moonCloudyIcon;
+    } else if(data.hourly[i].icon==="cloudy"){
+      weatherDisplayMainHourlyDivImg.src=cloudIcon;
+    } else if(data.hourly[i].icon==="wind"){
+      weatherDisplayMainHourlyDivImg.src=windIcon;
+    } else if(data.hourly[i].icon==="rain"){
+      weatherDisplayMainHourlyDivImg.src=rainIcon;
+    } else if(data.hourly[i].icon==="snow"){
+      weatherDisplayMainHourlyDivImg.src=snowIcon;
+    } else if(data.hourly[i].icon==="thunderstorm"){
+      weatherDisplayMainHourlyDivImg.src=stormIcon;
+    } else {
+      weatherDisplayMainHourlyDivImg.src=errorIcon;
+    }
+
+    weatherDisplayMainHourlyDiv.appendChild(weatherDisplayMainHourlyDivImg);
+
+    const weatherDisplayMainHourlyDivSpan = document.createElement("span")
+    weatherDisplayMainHourlyDivSpan.classList.add("weather-display-main-hourly-hour")
+    weatherDisplayMainHourlyDivSpan.textContent=data.hourly[i].datetime.slice(0,2) +"h"
+    weatherDisplayMainHourlyDiv.appendChild(weatherDisplayMainHourlyDivSpan);
+
+    console.log(data.currentHour)
+    
+    if (data.hourly[i].datetime.slice(0,2)==data.currentHour.slice(0,2)){
+      weatherDisplayMainHourlyDivSpan.textContent = "Now"
+      weatherDisplayMainHourlyDivSpan.classList.add("now")
+    }
+
+    
+
+  }
+
+  const nowItem = document.querySelector(".now");
+
+    nowItem.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest"
+    });
+    
+
+  
+ 
 
 
   //Handle the weather Display Footer
+
+    const weatherDisplayFooterDiv = document.createElement("div")
+    weatherDisplayFooterDiv.classList.add("weather-display-footer")
+    weatherDisplayDiv.appendChild(weatherDisplayFooterDiv)
+
+    const weatherDisplayFooterLeftDiv = document.createElement("div")
+    weatherDisplayFooterLeftDiv.classList.add("weather-display-footer-left")
+    weatherDisplayFooterDiv.appendChild(weatherDisplayFooterLeftDiv)
+
+    const weatherDisplayFooterLeftDivHumidity = document.createElement("span")
+    weatherDisplayFooterLeftDivHumidity.classList.add("weather-display-footer-left-humidity")
+    weatherDisplayFooterLeftDivHumidity.textContent=data.currentHumidity+" %";
+    weatherDisplayFooterLeftDiv.appendChild(weatherDisplayFooterLeftDivHumidity)
+
+    const weatherDisplayFooterLeftDivWind = document.createElement("span")
+    weatherDisplayFooterLeftDivWind.classList.add("weather-display-footer-left-wind")
+    weatherDisplayFooterLeftDivWind.textContent=data.currentWindspeed+" km/h"
+    weatherDisplayFooterLeftDiv.appendChild(weatherDisplayFooterLeftDivWind)
+
+    const weatherDisplayFooterRightDiv =document.createElement("div")
+    weatherDisplayFooterRightDiv.classList.add("weather-display-footer-right")
+    weatherDisplayFooterDiv.appendChild(weatherDisplayFooterRightDiv)
+
+    const weatherDisplayFooterRightDivShare = document.createElement("img")
+    weatherDisplayFooterRightDivShare.classList.add("weather-display-footer-right-share","icon")
+    weatherDisplayFooterRightDivShare.src = shareIcon;
+    weatherDisplayFooterRightDiv.appendChild(weatherDisplayFooterRightDivShare) 
+
+    const weatherDisplayFooterRightDivMap = document.createElement("img")
+    weatherDisplayFooterRightDivMap.classList.add("weather-display-footer-right-map","icon")
+    weatherDisplayFooterRightDivMap.src = mapIcon;
+    weatherDisplayFooterRightDiv.appendChild(weatherDisplayFooterRightDivMap) 
+
 
 
 }
